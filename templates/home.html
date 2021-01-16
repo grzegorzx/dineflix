@@ -1,0 +1,17 @@
+{% extends "bootstrap/base.html" %}
+
+{% block title %}
+
+This is an example page
+
+{% endblock %}
+
+{% block content %}
+
+<form method="POST">
+  {{ form.hidden_tag() }}
+  {{ form.ingredients.label }} {{ form.ingredients() }}
+  {{ form.submit() }}
+</form>
+
+{% endblock %}
