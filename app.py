@@ -28,10 +28,9 @@ def home():
     form = IngredientsForm()
     if form.validate_on_submit():
         ingredients = form.ingredients.data
-        # form.ingredients.data = ''
-        response = spoon.search_recipes_by_ingredients(ingredients)
-        data = response.json()
-        return str(data)
+        recipes = spoon.search_recipes_by_ingredients(ingredients)
+        session['recipes'] = recipes.json()
+        return redirect(url_for('ideas'))
     return render_template('home.html', form=form, ingredients=ingredients)
 
 @app.route('/movie/<movie>', methods=['POST', 'GET'])
@@ -45,9 +44,10 @@ def sp_test():
     data = r.json()
     return str(data)
 
-@app.route('/ideas', methods=['POST', 'GET'])
+@app.route('/ideas')
 def ideas():
-    return render_template('ideas.html')
+    recipes = session['recipes']
+    return render_template('ideas.html', recipes=recipes)
 
 if __name__ == '__main__':
     app.run(debug=True)

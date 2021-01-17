@@ -4,4 +4,9 @@
 
 {% block content %}
 
+{% for recipe in recipes %}
+    <!-- <div id="recipe">{{ recipe }}</div> -->
+    <img src= {{ recipe.image }} alt={{ recipe.id }} >{{ recipe.title }}</img> <br>
+{% endfor %}
+
 {% endblock %}
